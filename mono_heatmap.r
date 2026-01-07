@@ -42,21 +42,17 @@ interest1<-c("FERULIC ACID",
              "SYRINGIC ACID")
 heatmap1<-mat_metab_num[,interest1]
 
-group <- factor(c(rep("15% inWAX", 4), rep("15% cellulose", 4)))  # 修改为实际样本数量
+group <- factor(c(rep("BI+inWAX", 4), rep("BI+15% Cellu", 4)))  # 修改为实际样本数量
 names(group) <- rownames(heatmap1)
 
-group_col <- c("15% cellulose" = "#92bfdb", "15% inWAX" = "#d73027")
+group_col <- c("BI+15% Cellu" = "#92bfdb", "BI+inWAX" = "#d73027")
 
 # 4️⃣ 创建行注释对象
 top_ha <- HeatmapAnnotation(
   Group = group,
   col = list(Group = group_col),
   show_annotation_name = FALSE,  # 不显示 title
-  show_legend = FALSE,
-  annotation_legend_param = list(
-    title_gp = gpar(fontsize=12, fontface="bold"),
-    labels_gp = gpar(fontsize=10, fontface="bold")
-  )
+  show_legend = FALSE
 )
 # 5️⃣ 行标准化（Z-score）
 heatmap_z <- t(scale(heatmap1))
@@ -64,7 +60,7 @@ colnames(heatmap_z) <- c("1","2","3","4","1","2","3","4")
 library(ComplexHeatmap)
 library(circlize)
 # 6️⃣ 绘制热图
-pdf("heatmap1.pdf", width = 6.5, height = 3.5)
+pdf("heatmap1.pdf", width = 10.5, height = 4.5)
 Heatmap(
   heatmap_z,
   name = "Z-score",
@@ -75,11 +71,14 @@ Heatmap(
   show_row_names = TRUE,
   show_column_names = TRUE,
   column_names_rot = 0,
-  row_names_gp = gpar(fontsize = 10, fontface = "bold"),       # 行名
-  column_names_gp = gpar(fontsize = 11, fontface = "bold"), 
+  row_names_gp = gpar(fontsize = 15, fontface = "bold"),       # 行名
+  column_names_gp = gpar(fontsize = 13, fontface = "bold"), 
   column_split = group,         # ✅ 按样本分 block
   column_gap = unit(3, "mm"), border = TRUE, # ✅ 组间空隙
-  top_annotation = top_ha       # 显示分组颜色条
+  column_title_gp = gpar(fontsize = 18, fontface = "bold"),
+  top_annotation = top_ha,       # 显示分组颜色条
+  width = ncol(heatmap_z)*unit(12, "mm"), 
+  height = nrow(heatmap_z)*unit(12, "mm")
 )
 dev.off() 
 
@@ -92,7 +91,7 @@ heatmap2<-mat_metab_num[,interest2]
 
 heatmap_z2 <- t(scale(heatmap2))
 colnames(heatmap_z2) <- c("1","2","3","4","1","2","3","4")
-pdf("heatmap2.pdf", width = 6.5, height = 3.5)
+pdf("heatmap2.pdf", width = 10.5, height = 4.5)
 Heatmap(
   heatmap_z2,
   name = "Z-score",
@@ -103,11 +102,14 @@ Heatmap(
   show_row_names = TRUE,
   show_column_names = TRUE,
   column_names_rot = 0,
-  row_names_gp = gpar(fontsize = 10, fontface = "bold"),       # 行名
-  column_names_gp = gpar(fontsize = 11, fontface = "bold"), 
+  row_names_gp = gpar(fontsize = 15, fontface = "bold"),       # 行名
+  column_names_gp = gpar(fontsize = 14, fontface = "bold"), 
   column_split = group,         # ✅ 按样本分 block
   column_gap = unit(3, "mm"), border = TRUE, # ✅ 组间空隙
-  top_annotation = top_ha       # 显示分组颜色条
+  column_title_gp = gpar(fontsize = 18, fontface = "bold"),
+  top_annotation = top_ha,       # 显示分组颜色条
+  width = ncol(heatmap_z2)*unit(12, "mm"), 
+  height = nrow(heatmap_z2)*unit(12, "mm")
 )
 dev.off() 
 
@@ -123,7 +125,7 @@ heatmap3<-mat_metab_num[,interest3]
 
 heatmap_z3 <- t(scale(heatmap3))
 colnames(heatmap_z3) <- c("1","2","3","4","1","2","3","4")
-pdf("heatmap3.pdf", width = 8.7, height = 4.5)
+pdf("heatmap3.pdf", width = 10.5, height = 4.5)
 Heatmap(
   heatmap_z3,
   name = "Z-score",
@@ -134,11 +136,14 @@ Heatmap(
   show_row_names = TRUE,
   show_column_names = TRUE,
   column_names_rot = 0,
-  row_names_gp = gpar(fontsize = 10, fontface = "bold"),       # 行名
-  column_names_gp = gpar(fontsize = 11, fontface = "bold"), 
+  row_names_gp = gpar(fontsize = 15, fontface = "bold"),       # 行名
+  column_names_gp = gpar(fontsize = 13, fontface = "bold"), 
   column_split = group,         # ✅ 按样本分 block
   column_gap = unit(3, "mm"), border = TRUE, # ✅ 组间空隙
-  top_annotation = top_ha       # 显示分组颜色条
+  column_title_gp = gpar(fontsize = 18, fontface = "bold"),
+  top_annotation = top_ha,       # 显示分组颜色条
+  width = ncol(heatmap_z3)*unit(12, "mm"), 
+  height = nrow(heatmap_z3)*unit(12, "mm")
 )
 dev.off() 
 
@@ -155,7 +160,7 @@ heatmap4<-mat_metab_num[,interest4]
 
 heatmap_z4 <- t(scale(heatmap4))
 colnames(heatmap_z4) <- c("1","2","3","4","1","2","3","4")
-pdf("heatmap4.pdf", width = 8.5, height = 4.5)
+pdf("heatmap4.pdf", width = 10.5, height = 4.5)
 Heatmap(
   heatmap_z4,
   name = "Z-score",
@@ -166,10 +171,14 @@ Heatmap(
   show_row_names = TRUE,
   show_column_names = TRUE,
   column_names_rot = 0,
-  row_names_gp = gpar(fontsize = 10, fontface = "bold"),       # 行名
-  column_names_gp = gpar(fontsize = 11, fontface = "bold"), 
+  row_names_gp = gpar(fontsize = 15, fontface = "bold"),       # 行名
+  column_names_gp = gpar(fontsize = 13, fontface = "bold"), 
   column_split = group,         # ✅ 按样本分 block
   column_gap = unit(3, "mm"), border = TRUE, # ✅ 组间空隙
-  top_annotation = top_ha       # 显示分组颜色条
+  column_title_gp = gpar(fontsize = 18, fontface = "bold"),
+  top_annotation = top_ha,       # 显示分组颜色条
+  width = ncol(heatmap_z4)*unit(12, "mm"), 
+  height = nrow(heatmap_z4)*unit(12, "mm")
 )
 dev.off() 
+
